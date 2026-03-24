@@ -1,17 +1,30 @@
 use eframe::egui;
 
-struct DictApp {}
+struct DictApp {
+    inputted_text: String,
+}
 
 impl DictApp {
     fn new(_cc: &eframe::CreationContext<'_>) -> Self {
-        Self {}
+        Self {
+            inputted_text: String::new(),
+        }
     }
 }
 
 impl eframe::App for DictApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
-            // ui.heading("My To-Do List");
+            ui.horizontal(|ui| {
+                let text_input = ui.text_edit_singleline(&mut self.inputted_text);
+
+                if (ui.button("Search").clicked()
+                    || (text_input.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter))))
+                    && !self.inputted_text.is_empty()
+                {
+                    text_input.request_focus();
+                }
+            })
         });
     }
 }
