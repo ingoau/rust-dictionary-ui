@@ -10,6 +10,30 @@ struct DictApp {
 
 impl DictApp {
     fn new(cc: &eframe::CreationContext<'_>) -> Self {
+        let mut fonts = egui::FontDefinitions::default();
+
+        fonts.font_data.insert(
+            "Outfit".to_owned(),
+            std::sync::Arc::new(
+                // .ttf and .otf supported
+                egui::FontData::from_static(include_bytes!("../assets/Outfit-Regular.ttf")),
+            ),
+        );
+
+        fonts
+            .families
+            .get_mut(&egui::FontFamily::Proportional)
+            .unwrap()
+            .insert(0, "Outfit".to_owned());
+
+        fonts
+            .families
+            .get_mut(&egui::FontFamily::Monospace)
+            .unwrap()
+            .push("Outfit".to_owned());
+
+        cc.egui_ctx.set_fonts(fonts);
+
         egui_material_icons::initialize(&cc.egui_ctx);
 
         Self {
