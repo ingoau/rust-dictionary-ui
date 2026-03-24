@@ -20,7 +20,7 @@ struct Phonetic {
 
 #[derive(Deserialize)]
 pub struct Definition {
-    word: String,
+    pub word: String,
     phonetics: Vec<Phonetic>,
     #[serde(rename = "sourceUrls")]
     source_urls: Vec<String>,

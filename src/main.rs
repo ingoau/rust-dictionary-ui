@@ -1,3 +1,5 @@
+use std::fmt::format;
+
 use eframe::egui;
 mod dict;
 
@@ -29,7 +31,14 @@ impl eframe::App for DictApp {
                     self.definitions = definitions;
                     text_input.request_focus();
                 }
-            })
+            });
+            ui.separator();
+            for (i, def) in self.definitions.iter().enumerate() {
+                let title = format!("{}. {}", i + 1, def.word);
+                ui.collapsing(title, |ui| {
+                    ui.label("test");
+                });
+            }
         });
     }
 }
