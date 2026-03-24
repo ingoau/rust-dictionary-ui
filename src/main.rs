@@ -36,7 +36,12 @@ impl eframe::App for DictApp {
             for (i, def) in self.definitions.iter().enumerate() {
                 let title = format!("{}. {}", i + 1, def.word);
                 ui.collapsing(title, |ui| {
-                    ui.label("test");
+                    ui.heading("Phonetics");
+                    ui.horizontal(|ui| {
+                        for phonetic in &def.phonetics {
+                            ui.label(phonetic.text.as_deref().unwrap_or(""));
+                        }
+                    })
                 });
             }
         });
