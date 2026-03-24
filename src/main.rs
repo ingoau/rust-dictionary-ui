@@ -36,6 +36,8 @@ impl DictApp {
 
         egui_material_icons::initialize(&cc.egui_ctx);
 
+        catppuccin_egui::set_theme(&cc.egui_ctx, catppuccin_egui::MOCHA);
+
         Self {
             inputted_text: String::new(),
             definitions: Vec::new(),
