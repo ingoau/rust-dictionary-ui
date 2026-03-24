@@ -70,6 +70,12 @@ impl eframe::App for DictApp {
                 });
             } else {
                 ui.horizontal(|ui| {
+                    if ui
+                        .button(egui_material_icons::icons::ICON_ARROW_BACK)
+                        .clicked()
+                    {
+                        self.definitions.clear();
+                    }
                     self.search_ui(ctx, _frame, ui);
                 });
                 ui.separator();
