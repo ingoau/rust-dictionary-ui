@@ -34,16 +34,20 @@ impl eframe::App for DictApp {
             });
             ui.separator();
             for (i, def) in self.definitions.iter().enumerate() {
-                let title = format!("{}. {}", i + 1, def.word);
-                ui.heading(title);
-                ui.horizontal(|ui| {
-                    for phonetic in &def.phonetics {
-                        ui.label(phonetic.text.as_deref().unwrap_or(""));
-                    }
+                egui::Frame::default().inner_margin(40.0).show(ui, |ui| {
+                    let title = format!("{}. {}", i + 1, def.word);
+                    ui.push_id(title.clone(), |ui| {
+                        ui.heading(title);
+                        ui.horizontal(|ui| {
+                            for phonetic in &def.phonetics {
+                                ui.label(phonetic.text.as_deref().unwrap_or(""));
+                            }
+                        });
+                        for (_, meaning) in def.meanings.iter().enumerate() {
+                            ui.collapsing(meaning.part_of_speech.clone(), |ui| ui.label("test"));
+                        }
+                    })
                 });
-                for (_, meaning) in def.meanings.iter().enumerate() {
-                    ui.collapsing(meaning.part_of_speech.clone(), |ui| ui.label("test"));
-                }
             }
         });
     }
