@@ -35,14 +35,15 @@ impl eframe::App for DictApp {
             ui.separator();
             for (i, def) in self.definitions.iter().enumerate() {
                 let title = format!("{}. {}", i + 1, def.word);
-                ui.collapsing(title, |ui| {
-                    ui.heading("Phonetics");
-                    ui.horizontal(|ui| {
-                        for phonetic in &def.phonetics {
-                            ui.label(phonetic.text.as_deref().unwrap_or(""));
-                        }
-                    })
+                ui.heading(title);
+                ui.horizontal(|ui| {
+                    for phonetic in &def.phonetics {
+                        ui.label(phonetic.text.as_deref().unwrap_or(""));
+                    }
                 });
+                for (_, meaning) in def.meanings.iter().enumerate() {
+                    ui.collapsing(meaning.part_of_speech.clone(), |ui| ui.label("test"));
+                }
             }
         });
     }
