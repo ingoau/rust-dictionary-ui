@@ -44,7 +44,16 @@ impl eframe::App for DictApp {
                             }
                         });
                         for (_, meaning) in def.meanings.iter().enumerate() {
-                            ui.collapsing(meaning.part_of_speech.clone(), |ui| ui.label("test"));
+                            ui.collapsing(meaning.part_of_speech.clone(), |ui| {
+                                for (i, definition) in meaning.definitions.iter().enumerate() {
+                                    ui.push_id(&i, |ui| {
+                                        ui.label(definition.definition.clone());
+                                        if let Some(example) = &definition.example {
+                                            ui.label(example.clone());
+                                        }
+                                    });
+                                }
+                            });
                         }
                     });
                 });
