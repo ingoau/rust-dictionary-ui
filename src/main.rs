@@ -9,7 +9,9 @@ struct DictApp {
 }
 
 impl DictApp {
-    fn new(_cc: &eframe::CreationContext<'_>) -> Self {
+    fn new(cc: &eframe::CreationContext<'_>) -> Self {
+        egui_material_icons::initialize(&cc.egui_ctx);
+
         Self {
             inputted_text: String::new(),
             definitions: Vec::new(),
@@ -19,8 +21,6 @@ impl DictApp {
 
 impl eframe::App for DictApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        egui_material_icons::initialize(ctx);
-
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.horizontal(|ui| {
                 let text_input = ui.text_edit_singleline(&mut self.inputted_text);
