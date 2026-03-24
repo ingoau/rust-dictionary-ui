@@ -24,7 +24,9 @@ impl eframe::App for DictApp {
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.horizontal(|ui| {
                 let text_input = ui.text_edit_singleline(&mut self.inputted_text);
-                if (ui.button("Search").clicked()
+                if (ui
+                    .button("Search ".to_owned() + egui_material_icons::icons::ICON_SEARCH)
+                    .clicked()
                     || (text_input.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter))))
                     && !self.inputted_text.is_empty()
                 {
