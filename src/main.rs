@@ -41,24 +41,28 @@ impl DictApp {
             definitions: Vec::new(),
         }
     }
+
+    fn search_ui(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame, ui: &mut egui::Ui) {
+        ui.horizontal(|ui| {
+            let text_input = ui.text_edit_singleline(&mut self.inputted_text);
+            if (ui
+                .button("Search ".to_owned() + egui_material_icons::icons::ICON_SEARCH)
+                .clicked()
+                || (text_input.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter))))
+                && !self.inputted_text.is_empty()
+            {
+                let definitions = dict::get_defenition(&self.inputted_text);
+                self.definitions = definitions;
+                text_input.request_focus();
+            }
+        });
+    }
 }
 
 impl eframe::App for DictApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
-            ui.horizontal(|ui| {
-                let text_input = ui.text_edit_singleline(&mut self.inputted_text);
-                if (ui
-                    .button("Search ".to_owned() + egui_material_icons::icons::ICON_SEARCH)
-                    .clicked()
-                    || (text_input.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter))))
-                    && !self.inputted_text.is_empty()
-                {
-                    let definitions = dict::get_defenition(&self.inputted_text);
-                    self.definitions = definitions;
-                    text_input.request_focus();
-                }
-            });
+            self.search_ui(ctx, _frame, ui);
             ui.separator();
             egui::ScrollArea::vertical()
                 .auto_shrink(false)
