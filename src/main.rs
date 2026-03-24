@@ -34,9 +34,9 @@ impl eframe::App for DictApp {
             });
             ui.separator();
             for (i, def) in self.definitions.iter().enumerate() {
-                egui::Frame::default().inner_margin(40.0).show(ui, |ui| {
-                    let title = format!("{}. {}", i + 1, def.word);
-                    ui.push_id(title.clone(), |ui| {
+                let title = format!("{}. {}", i + 1, def.word);
+                ui.push_id(title.clone(), |ui| {
+                    egui::Frame::default().inner_margin(16).show(ui, |ui| {
                         ui.heading(title);
                         ui.horizontal(|ui| {
                             for phonetic in &def.phonetics {
@@ -46,7 +46,7 @@ impl eframe::App for DictApp {
                         for (_, meaning) in def.meanings.iter().enumerate() {
                             ui.collapsing(meaning.part_of_speech.clone(), |ui| ui.label("test"));
                         }
-                    })
+                    });
                 });
             }
         });
