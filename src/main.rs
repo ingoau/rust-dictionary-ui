@@ -1,14 +1,14 @@
 use eframe::egui;
 
-struct TodoApp {}
+struct DictApp {}
 
-impl TodoApp {
+impl DictApp {
     fn new(_cc: &eframe::CreationContext<'_>) -> Self {
         Self {}
     }
 }
 
-impl eframe::App for TodoApp {
+impl eframe::App for DictApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
             // ui.heading("My To-Do List");
@@ -21,6 +21,6 @@ fn main() -> eframe::Result {
     eframe::run_native(
         "Dictionary Thingy™",
         native_options,
-        Box::new(|cc| Ok(Box::new(TodoApp::new(cc)))),
+        Box::new(|cc| Ok(Box::new(DictApp::new(cc)))),
     )
 }
