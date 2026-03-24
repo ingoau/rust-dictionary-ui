@@ -33,31 +33,37 @@ impl eframe::App for DictApp {
                 }
             });
             ui.separator();
-            for (i, def) in self.definitions.iter().enumerate() {
-                let title = format!("{}. {}", i + 1, def.word);
-                ui.push_id(title.clone(), |ui| {
-                    egui::Frame::default().inner_margin(16).show(ui, |ui| {
-                        ui.heading(title);
-                        ui.horizontal(|ui| {
-                            for phonetic in &def.phonetics {
-                                ui.label(phonetic.text.as_deref().unwrap_or(""));
-                            }
-                        });
-                        for (_, meaning) in def.meanings.iter().enumerate() {
-                            ui.collapsing(meaning.part_of_speech.clone(), |ui| {
-                                for (i, definition) in meaning.definitions.iter().enumerate() {
-                                    ui.push_id(&i, |ui| {
-                                        ui.label(definition.definition.clone());
-                                        if let Some(example) = &definition.example {
-                                            ui.label(example.clone());
+            egui::ScrollArea::vertical()
+                .auto_shrink(false)
+                .show(ui, |ui| {
+                    for (i, def) in self.definitions.iter().enumerate() {
+                        let title = format!("{}. {}", i + 1, def.word);
+                        ui.push_id(title.clone(), |ui| {
+                            egui::Frame::default().inner_margin(16).show(ui, |ui| {
+                                ui.heading(title);
+                                ui.horizontal(|ui| {
+                                    for phonetic in &def.phonetics {
+                                        ui.label(phonetic.text.as_deref().unwrap_or(""));
+                                    }
+                                });
+                                for (_, meaning) in def.meanings.iter().enumerate() {
+                                    ui.collapsing(meaning.part_of_speech.clone(), |ui| {
+                                        for (i, definition) in
+                                            meaning.definitions.iter().enumerate()
+                                        {
+                                            ui.push_id(&i, |ui| {
+                                                ui.label(definition.definition.clone());
+                                                if let Some(example) = &definition.example {
+                                                    ui.label(example.clone());
+                                                }
+                                            });
                                         }
                                     });
                                 }
                             });
-                        }
-                    });
+                        });
+                    }
                 });
-            }
         });
     }
 }
