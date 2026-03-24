@@ -1,13 +1,16 @@
 use eframe::egui;
+mod dict;
 
 struct DictApp {
     inputted_text: String,
+    definitions: Vec<dict::Definition>,
 }
 
 impl DictApp {
     fn new(_cc: &eframe::CreationContext<'_>) -> Self {
         Self {
             inputted_text: String::new(),
+            definitions: Vec::new(),
         }
     }
 }
