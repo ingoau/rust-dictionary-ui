@@ -1,30 +1,30 @@
 use serde::Deserialize;
 
 #[derive(Deserialize)]
-struct MeaningDefinition {
-    definition: String,
-    example: Option<String>,
+pub struct MeaningDefinition {
+    pub definition: String,
+    pub example: Option<String>,
 }
 
 #[derive(Deserialize)]
-struct Meaning {
+pub struct Meaning {
     #[serde(rename = "partOfSpeech")]
-    part_of_speech: String,
-    definitions: Vec<MeaningDefinition>,
+    pub part_of_speech: String,
+    pub definitions: Vec<MeaningDefinition>,
 }
 
 #[derive(Deserialize)]
-struct Phonetic {
-    text: Option<String>,
+pub struct Phonetic {
+    pub text: Option<String>,
 }
 
 #[derive(Deserialize)]
 pub struct Definition {
     pub word: String,
-    phonetics: Vec<Phonetic>,
+    pub phonetics: Vec<Phonetic>,
     #[serde(rename = "sourceUrls")]
-    source_urls: Vec<String>,
-    meanings: Vec<Meaning>,
+    pub source_urls: Vec<String>,
+    pub meanings: Vec<Meaning>,
 }
 
 pub fn get_defenition(word: &str) -> Vec<Definition> {
