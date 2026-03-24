@@ -107,6 +107,7 @@ impl eframe::App for DictApp {
                                         });
                                     }
                                 });
+                                ui.separator();
                             });
                         }
                     });
