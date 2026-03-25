@@ -1,5 +1,3 @@
-use std::fmt::format;
-
 use eframe::egui;
 mod dict;
 
@@ -46,7 +44,7 @@ impl DictApp {
         }
     }
 
-    fn search_ui(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame, ui: &mut egui::Ui) {
+    fn search_ui(&mut self, _frame: &mut eframe::Frame, ui: &mut egui::Ui) {
         let text_input = ui.text_edit_singleline(&mut self.inputted_text);
         if (ui
             .button("Search ".to_owned() + egui_material_icons::icons::ICON_SEARCH)
@@ -65,7 +63,7 @@ impl DictApp {
 impl eframe::App for DictApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
-            if (!self.show_definitions) {
+            if !self.show_definitions {
                 ui.vertical_centered(|ui| {
                     egui::Frame::default().inner_margin(16).show(ui, |ui| {
                         ui.heading(egui_material_icons::icons::ICON_DICTIONARY);
@@ -73,7 +71,7 @@ impl eframe::App for DictApp {
                         ui.heading("Dictionary Thingy™");
                         ui.label("Enter a word to search for its definition.");
                         ui.add_space(8.0);
-                        self.search_ui(ctx, _frame, ui);
+                        self.search_ui(_frame, ui);
                     })
                 });
             } else {
@@ -85,10 +83,10 @@ impl eframe::App for DictApp {
                         self.definitions.clear();
                         self.show_definitions = false;
                     }
-                    self.search_ui(ctx, _frame, ui);
+                    self.search_ui(_frame, ui);
                 });
                 ui.separator();
-                if (self.definitions.is_empty()) {
+                if self.definitions.is_empty() {
                     ui.heading("No definitions found.");
                 }
                 egui::ScrollArea::vertical()

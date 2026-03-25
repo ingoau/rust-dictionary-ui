@@ -23,7 +23,6 @@ pub struct Definition {
     pub word: String,
     pub phonetics: Vec<Phonetic>,
     #[serde(rename = "sourceUrls")]
-    pub source_urls: Vec<String>,
     pub meanings: Vec<Meaning>,
 }
 
