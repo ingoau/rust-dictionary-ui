@@ -116,6 +116,9 @@ impl eframe::App for DictApp {
                                             }
                                         });
                                     }
+                                    for (_, source_url) in def.source_urls.iter().enumerate() {
+                                        ui.hyperlink(source_url);
+                                    }
                                 });
                                 ui.separator();
                             });
