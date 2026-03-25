@@ -65,7 +65,7 @@ impl DictApp {
 impl eframe::App for DictApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
-            if (self.definitions.is_empty()) {
+            if (!self.show_definitions) {
                 ui.vertical_centered(|ui| {
                     egui::Frame::default().inner_margin(16).show(ui, |ui| {
                         ui.heading("Dictionary Thingy™");
