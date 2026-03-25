@@ -42,7 +42,7 @@ impl DictApp {
         Self {
             inputted_text: String::new(),
             definitions: Vec::new(),
-            show_definitions: true,
+            show_definitions: false,
         }
     }
 
