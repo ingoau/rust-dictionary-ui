@@ -15,5 +15,10 @@ jobs:
       - run: cargo build --release
       - uses: actions/upload-artifact@v4
         with:
-          name: rust-dictionary-ui
-          path: ./target/release/rust-dictionary-ui
+          name: build-files
+          path: ./target/release
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          files: ./target/release/rust-dictionary-ui
