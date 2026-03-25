@@ -37,7 +37,7 @@ pub fn get_defenition(word: &str) -> Vec<Definition> {
         .send()
         .expect("Failed to fetch definition")
         .json()
-        .expect("Failed to parse response");
+        .unwrap_or_else(|_| Vec::new());
 
     definition_response
 }
