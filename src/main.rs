@@ -6,6 +6,7 @@ mod dict;
 struct DictApp {
     inputted_text: String,
     definitions: Vec<dict::Definition>,
+    show_definitions: bool,
 }
 
 impl DictApp {
@@ -41,6 +42,7 @@ impl DictApp {
         Self {
             inputted_text: String::new(),
             definitions: Vec::new(),
+            show_definitions: true,
         }
     }
 
@@ -54,6 +56,7 @@ impl DictApp {
         {
             let definitions = dict::get_defenition(&self.inputted_text);
             self.definitions = definitions;
+            self.show_definitions = true;
             text_input.request_focus();
         }
     }
@@ -77,6 +80,7 @@ impl eframe::App for DictApp {
                         .clicked()
                     {
                         self.definitions.clear();
+                        self.show_definitions = false;
                     }
                     self.search_ui(ctx, _frame, ui);
                 });
