@@ -68,8 +68,11 @@ impl eframe::App for DictApp {
             if (!self.show_definitions) {
                 ui.vertical_centered(|ui| {
                     egui::Frame::default().inner_margin(16).show(ui, |ui| {
+                        ui.heading(egui_material_icons::icons::ICON_DICTIONARY);
+                        ui.add_space(8.0);
                         ui.heading("Dictionary Thingy™");
                         ui.label("Enter a word to search for its definition.");
+                        ui.add_space(8.0);
                         self.search_ui(ctx, _frame, ui);
                     })
                 });
