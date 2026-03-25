@@ -88,6 +88,9 @@ impl eframe::App for DictApp {
                     self.search_ui(ctx, _frame, ui);
                 });
                 ui.separator();
+                if (self.definitions.is_empty()) {
+                    ui.heading("No definitions found.");
+                }
                 egui::ScrollArea::vertical()
                     .auto_shrink(false)
                     .show(ui, |ui| {
