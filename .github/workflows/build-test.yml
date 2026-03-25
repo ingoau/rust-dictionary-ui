@@ -22,3 +22,7 @@ jobs:
       - run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
       - run: cargo build --verbose
       - run: cargo test --verbose
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.toolchain }}-debug-build-files
+          path: ./target/debug/rust-dictionary-ui
