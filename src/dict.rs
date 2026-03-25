@@ -27,7 +27,7 @@ pub struct Definition {
     pub meanings: Vec<Meaning>,
 }
 
-pub fn get_defenition(word: &str) -> Vec<Definition> {
+pub fn get_definition(word: &str) -> Vec<Definition> {
     let client = reqwest::blocking::Client::new();
 
     let url = format!("https://api.dictionaryapi.dev/api/v2/entries/en/{word}");

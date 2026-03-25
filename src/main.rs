@@ -52,7 +52,7 @@ impl DictApp {
             || (text_input.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter))))
             && !self.inputted_text.is_empty()
         {
-            let definitions = dict::get_defenition(&self.inputted_text);
+            let definitions = dict::get_definition(&self.inputted_text);
             self.definitions = definitions;
             self.show_definitions = true;
             text_input.request_focus();
