@@ -1,0 +1,19 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - "*"
+      -
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup update stable && rustup default stable
+      - run: cargo build --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rust-dictionary-ui
+          path: ./target/release/rust-dictionary-ui
